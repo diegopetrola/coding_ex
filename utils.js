@@ -1,6 +1,7 @@
 "use strict";
 
 /**
+* LeetCode: Is Power of Three
 * @param {number} n
 * @return {boolean}
 */
@@ -11,6 +12,7 @@ exports.isPowerOfThree = function (n) {
 };
 
 /**
+ * LeetCode: Roman to Integer
  * @param {string} s
  * @return {number}
  */
@@ -40,6 +42,7 @@ exports.romanToInt = function (s, debug = false) {
 };
 
 /**
+* LeetCode: Hamming Distance
 * @param {number} x
 * @param {number} y
 * @return {number}
@@ -57,6 +60,7 @@ exports.hammingDistance = function (x, y, debug = false) {
 };
 
 /**
+ * LeetCode: Reverse Bits
  * @param {number} n - a positive integer
  * @return {number} - a positive integer
  */
@@ -71,6 +75,7 @@ exports.reverseBits = function (n) {
 };
 
 /**
+ * LeetCode: Pascal's triangle
  * Generate a Pascal triangle with numRows levels
  * @param {number} numRows
  * @return {number[][]}
