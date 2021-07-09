@@ -31,3 +31,22 @@ def test_kthSmallest(param, k, expected):
 def test_longestPalindrome(st, expected):
     s = Solution()
     assert s.longestPalindrome(st) in expected
+
+
+# @pytest.mark.parametrize('nums1, nums2, expected', [
+#     ([1, 2, 3, 3, 2, 1], [1, 2, 1, 3, 2, 1], 3),
+# ])
+# def test_findLength(nums1, nums2, expected):
+#     s = Solution()
+#     assert s.findLength(nums1, nums2) == expected
+
+@pytest.mark.parametrize('nums, expected', [
+    ([1, 2, 3, 4], 24),
+    ([1], 1),
+    ([], 0),
+    ([1, 2, 3], 6),
+    ([1, 2, 3, 4, 5, 6, 7], 7*6*5*4*3*2),
+])
+def test_permute(nums, expected):
+    s = Solution()
+    assert len(s.permute(nums)) == expected
