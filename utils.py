@@ -111,10 +111,46 @@ class Solution:
         breakpoint()
         return _findLength(0, len(nums1))
 
+    def convert(self, s: str, numRows: int) -> str:
+        """
+        Return a zig zag pattern of a strin
+
+        More info: https://leetcode.com/problems/zigzag-conversion/
+        """
+
+        def zigzag_gen(i, numR, size):
+            n = i
+            step = max(2*numR - 2, 1)
+            complement = step
+            if i not in (0, numR-1):
+                complement = 2*i
+                step -= complement
+            alternate = True
+            while n < size:
+                yield n
+                n += step if alternate else complement
+                alternate = not alternate
+
+        res = ''
+        size = len(s)
+
+        for i in range(numRows):
+            for j in zigzag_gen(i, numRows, size):
+                res += s[j]
+
+        return res
+
+        # for i in range(numRows):
+        #     res += ''.join([s[c] for c in range(i, size, step)])
+        #     for j in range():
+        #         pass
+
+        #     res += ''.join([s[c] for c in range(i, size, 2)])
+
+        # return res
+
 
 if __name__ == "__main__":
     s = Solution()
-
-    x = [i for i in range(3)]
-    # breakpoint()
-    print((s.permute(x)))
+    breakpoint()
+    print((s.convert('a', 1)))

@@ -50,3 +50,15 @@ def test_longestPalindrome(st, expected):
 def test_permute(nums, expected):
     s = Solution()
     assert len(s.permute(nums)) == expected
+
+
+@pytest.mark.parametrize('s, nrows, expected', [
+    ('01234567890', 4, '06157248039'),
+    ('a', 1, 'a'),
+    ('', 2, ''),
+    ('PAYPALISHIRING', 3, 'PAHNAPLSIIGYIR'),
+    ('PAYPALISHIRING', 4, 'PINALSIGYAHRPI'),
+])
+def test_convert(s, nrows, expected):
+    sol = Solution()
+    assert sol.convert(s, nrows) == expected
