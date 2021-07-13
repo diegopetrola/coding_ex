@@ -148,9 +148,33 @@ class Solution:
         #     res += ''.join([s[c] for c in range(i, size, 2)])
 
         # return res
+    def findPeakElement(self, nums: List[int]) -> int:
+        """LeetCode: Find Peak Element"""
+        def isPeak(nums, index, size):
+            a = nums[index-1] if index-1 > -1 else float('-inf')
+            c = nums[index+1] if index+1 < size else float('-inf')
+
+            if nums[index] < a:
+                return -1
+            if nums[index] < c:
+                return 1
+            return 0
+
+        size = len(nums)
+        l = 0
+        r = size
+        while l < r:
+            i = (l+r)//2
+            p = isPeak(nums, i, size)
+            if p > 0:
+                l = i
+            elif p < 0:
+                r = i
+            else:
+                return i
 
 
 if __name__ == "__main__":
     s = Solution()
     breakpoint()
-    print((s.convert('a', 1)))
+    print((s.findPeakElement([2, 1])))

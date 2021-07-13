@@ -62,3 +62,18 @@ def test_permute(nums, expected):
 def test_convert(s, nrows, expected):
     sol = Solution()
     assert sol.convert(s, nrows) == expected
+
+
+@pytest.mark.parametrize('nums, expected', [
+    ([1, 2, 1, 3], (1, 3)),
+    ([1], (0,)),
+    ([1, 0, 1, 3, 4, 3], (0, 4)),
+    ([1, 2], (1,)),
+    ([2, 1], (0,)),
+    ([6, 1, 3, 1, 2], (0, 2, 4)),
+    ([1, 2, 1, 3, 5, 6, 4], (1, 5)),
+    ([3, 2, 1, 0, -1, 0, 1], (0,)),
+])
+def test_peakElement(nums, expected):
+    sol = Solution()
+    assert sol.findPeakElement(nums) in expected
