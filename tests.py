@@ -77,3 +77,12 @@ def test_convert(s, nrows, expected):
 def test_peakElement(nums, expected):
     sol = Solution()
     assert sol.findPeakElement(nums) in expected
+
+
+@pytest.mark.parametrize('order, s, expected', [
+    ('cba', 'abcd', 'dcba'),
+    ('321', '1234', '4321'),
+])
+def test_customSort(order: str, s: str, expected: str):
+    sol = Solution()
+    assert sol.customSortString(order, s) == expected

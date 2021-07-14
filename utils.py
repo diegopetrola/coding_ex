@@ -173,8 +173,16 @@ class Solution:
             else:
                 return i
 
+    def customSortString(self, order: str, str: str) -> str:
+        """LeeCode: Custom Sort String"""
+        d = {}
+        for i, c in enumerate(order):
+            d[c] = i
+
+        return ''.join(sorted(str, key=lambda c: d.get(c, -1)))
+
 
 if __name__ == "__main__":
     s = Solution()
-    breakpoint()
-    print((s.findPeakElement([2, 1])))
+    # breakpoint()
+    print((s.customSortString('cba', 'abcd')))
