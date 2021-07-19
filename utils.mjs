@@ -193,3 +193,39 @@ export function reverseKGroup(head, k) {
     debugger;
     return res;
 };
+
+
+/**
+ * Definition of a node for binary tree
+ */
+export class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+}
+
+
+/**
+ * LeetCode: Lowest Common Ancestor of a Binary Search Tree
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+export function lowestCommonAncestor(root, p, q) {
+    let cur = root;
+    let M = Math.max(p.val, q.val);
+    let m = Math.min(p.val, q.val);
+
+    while (cur !== null) {
+        if (m <= cur.val && cur.val <= M) {
+            return cur;
+        } else if (M < cur.val) {
+            cur = cur.left;
+        } else if (cur.val < m) {
+            cur = cur.right;
+        }
+    }
+    return null;
+};

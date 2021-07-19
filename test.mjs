@@ -1,6 +1,6 @@
 import {
     isPowerOfThree, romanToInt, hammingDistance,
-    generate, reverseKGroup, arrayToListNode
+    generate, reverseKGroup, arrayToListNode, TreeNode, lowestCommonAncestor
 } from './utils.mjs';
 import { expect } from 'chai';
 
@@ -98,6 +98,30 @@ describe('reverseKGroup', function () {
             expect(
                 reverseKGroup(arrayToListNode(t.ar), t.k).toArray()
             ).to.deep.equals(t.expected);
+        });
+    }
+});
+
+describe('lowestCommonAncestor', function () {
+    let tree1 = new TreeNode(6);
+    tree1.left = new TreeNode(2); tree1.right = new TreeNode(8);
+    tree1.left.left = new TreeNode(0); tree1.left.right = new TreeNode(4);
+    tree1.left.right.left = new TreeNode(3); tree1.left.right.right = new TreeNode(5);
+
+    const testCases = [
+        { root: tree1, p: new TreeNode(2), q: new TreeNode(8), expected: 6, debug: false, },
+        { root: tree1, p: new TreeNode(2), q: new TreeNode(4), expected: 2, debug: false, },
+        { root: tree1, p: new TreeNode(3), q: new TreeNode(5), expected: 4, debug: false, },
+        { root: tree1, p: new TreeNode(7), q: new TreeNode(9), expected: 8, debug: false, },
+    ];
+
+    for (const t of testCases) {
+        // if (t.debug) { debugger };
+        it(`Testing ${t.root.val} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                lowestCommonAncestor(t.root, t.p, t.q).val
+            ).to.equals(t.expected);
         });
     }
 });

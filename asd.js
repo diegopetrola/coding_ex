@@ -1,13 +1,8 @@
-import { ListNode, reverseKGroup, arrayToListNode } from './utils.mjs';
+import { TreeNode, lowestCommonAncestor } from './utils.mjs';
 
-let x = new ListNode(1);
-x.next = new ListNode(2);
-x.next.next = new ListNode(3);
-x.next.next.next = new ListNode(4);
-x.next.next.next.next = new ListNode(5);
-// x.next.next.next.next.next = new ListNode(6);
+let tree1 = new TreeNode(6);
+tree1.left = new TreeNode(2); tree1.right = new TreeNode(8);
+tree1.left.left = new TreeNode(0); tree1.left.right = new TreeNode(4);
+tree1.left.right.left = new TreeNode(3); tree1.left.right.right = new TreeNode(5);
 
-// debugger;
-// console.log(reverseKGroup(x, 3).toArray());
-
-console.log(arrayToListNode([1, 2, 3, 4, 5]).toArray());
+console.log(lowestCommonAncestor(tree1, 2, 8));
