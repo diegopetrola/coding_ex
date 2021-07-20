@@ -229,3 +229,40 @@ export function lowestCommonAncestor(root, p, q) {
     }
     return null;
 };
+
+
+/**
+ * LeetCode: ArrayShuffler
+ */
+export class Solution {
+    /**
+     * @param {Array} nums 
+     */
+    constructor(nums) {
+        this.original = nums;
+        this.shuffled = [...nums];
+    }
+}
+
+/**
+ * Resets the array to its original configuration and return it.
+ * @return {number[]}
+ */
+Solution.prototype.reset = function () {
+    this.shuffled = [...this.original];
+    return this.shuffled;
+};
+
+/**
+ * Returns a random shuffling of the array.
+ * @return {number[]}
+ */
+Solution.prototype.shuffle = function () {
+    for (let i = 0; i < this.shuffled.length; i++) {
+        let j = Number.parseInt(i + Math.random() * (this.shuffled.length - i));
+        [this.shuffled[i], this.shuffled[j]] = [this.shuffled[j], this.shuffled[i]];
+    }
+    return this.shuffled;
+};
+
+
