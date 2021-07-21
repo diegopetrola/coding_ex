@@ -265,4 +265,53 @@ Solution.prototype.shuffle = function () {
     return this.shuffled;
 };
 
+/**
+ * LeetCode: Push Dominoes
+ * @param {string} dominoes
+ * @return {string}
+ */
+export function pushDominoes(dominoes) {
+    let force = 0;
+    let res = Array(dominoes.length);
+
+    for (let i = 0; i < dominoes.length; i++) {
+        switch (dominoes[i]) {
+            case '.':
+                res[i] = force;
+                force /= 2;
+                break;
+            case 'L':
+                res[i] = 'L';
+                force = 0;
+                break;
+            case 'R':
+                res[i] = 'R';
+                force = 1;
+                break;
+        }
+    }
+    force = 0;
+    for (let i = res.length - 1; i > -1; i--) {
+        switch (res[i]) {
+            case 'L':
+                force = -1;
+                break;
+            case 'R':
+                force = 0;
+                break;
+            default:
+                res[i] = res[i] + force;
+                if (res[i] < 0) {
+                    res[i] = 'L';
+                } else if (res[i] > 0) {
+                    res[i] = 'R';
+                } else {
+                    res[i] = '.';
+                }
+                force /= 2;
+        }
+    }
+
+    return res.join('');
+};
 

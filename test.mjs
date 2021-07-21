@@ -3,6 +3,7 @@ import {
     generate, reverseKGroup, arrayToListNode, TreeNode, lowestCommonAncestor
 } from './utils.mjs';
 import { expect } from 'chai';
+import { pushDominoes } from './utils.mjs';
 
 describe('PowerOfThree', function () {
 
@@ -122,6 +123,25 @@ describe('lowestCommonAncestor', function () {
             expect(
                 lowestCommonAncestor(t.root, t.p, t.q).val
             ).to.equals(t.expected);
+        });
+    }
+});
+
+
+describe('pushDominoes', function () {
+    const testCases = [
+        { dominoes: '.L.R...LR..L..', expected: "LL.RR.LLRRLL..", debug: false, },
+        { dominoes: '.', expected: ".", debug: false, },
+        { dominoes: 'L.', expected: "L.", debug: false, },
+        { dominoes: '.L', expected: "LL", debug: false, },
+        { dominoes: "RR.L", expected: "RR.L", debug: false, },
+    ];
+
+    for (const t of testCases) {
+        // if (t.debug) { debugger };
+        it(`Testing ${t.dominoes} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(pushDominoes(t.dominoes)).to.equals(t.expected);
         });
     }
 });
