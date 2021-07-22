@@ -16,7 +16,7 @@ export function isPowerOfThree(n) {
  * @param {string} s
  * @return {number}
  */
-export function romanToInt(s, debug = false) {
+export function romanToInt(s) {
     const intValues = {
         'I': 1,
         'V': 5,
@@ -26,8 +26,6 @@ export function romanToInt(s, debug = false) {
         'D': 500,
         'M': 1000,
     }
-
-    if (debug) debugger;
 
     let value = intValues[s[s.length - 1]];
     for (let i = s.length - 2; i > -1; i--) {
@@ -47,8 +45,7 @@ export function romanToInt(s, debug = false) {
 * @param {number} y
 * @return {number}
 */
-export function hammingDistance(x, y, debug = false) {
-    if (debug) debugger;
+export function hammingDistance(x, y) {
     let res = x ^ y;
 
     let count = 0;
@@ -80,9 +77,7 @@ export function reverseBits(n) {
  * @param {number} numRows
  * @return {number[][]}
  */
-export function generate(numRows, debug = false) {
-    if (debug) debugger;
-
+export function generate(numRows,) {
     function generateLevel(ar) {
         let level = [1];
 
@@ -182,7 +177,6 @@ export function reverseKGroup(head, k) {
         prev = cur;
         cur = cur.next;
         if (i % k == 0) {
-            debugger;
             lastTail = rev ? rev.tail : head;
             rev = reverse(kprev, k);
             lastTail.next = rev.head;
@@ -190,7 +184,6 @@ export function reverseKGroup(head, k) {
             rev.tail.next = cur;
         }
     }
-    debugger;
     return res;
 };
 
@@ -315,3 +308,29 @@ export function pushDominoes(dominoes) {
     return res.join('');
 };
 
+/**
+ * LeetCode: Partition Array into Disjoint Intervals
+ * @param {number[]} nums
+ * @return {number}
+ */
+export function partitionDisjoint(nums) {
+    let partition = { i: 1, val: nums[0] }
+    let maxN = nums[0];
+
+    for (let i = 1; i < nums.length; i++) {
+        // if we find a dip, go to the next value higher than maxN
+        if (nums[i] < partition.val) {
+            while (nums[i] < maxN) {
+                // if we get to the end of the array, return the last partition found
+                if (i == nums.length - 1) return partition.i;
+                i++;
+            }
+            partition.i = i;
+            partition.val = maxN;
+        }
+        maxN = Math.max(nums[i], maxN);
+    }
+
+    return partition.i;
+
+};

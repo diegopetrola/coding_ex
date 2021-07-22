@@ -4,6 +4,7 @@ import {
 } from './utils.mjs';
 import { expect } from 'chai';
 import { pushDominoes } from './utils.mjs';
+import { partitionDisjoint } from './utils.mjs';
 
 describe('PowerOfThree', function () {
 
@@ -142,6 +143,30 @@ describe('pushDominoes', function () {
         it(`Testing ${t.dominoes} expecting ${t.expected}`, function () {
             if (t.debug) debugger;
             expect(pushDominoes(t.dominoes)).to.equals(t.expected);
+        });
+    }
+});
+
+describe('partitionDisjoint', function () {
+    const testCases = [
+        { nums: [4, 2, 3, 1, 5, 8, 7, 5], expected: 4, debug: false, },
+        { nums: [5, 0, 3, 8, 6], expected: 3, debug: false, },
+        { nums: [1, 2], expected: 1, debug: false, },
+        { nums: [1, 1, 2], expected: 1, debug: false, },
+        { nums: [1, 2, 2], expected: 1, debug: false, },
+        { nums: [1, 1, 1, 0, 6, 12], expected: 4, debug: false, },
+        { nums: [1, 2, 1, 2, 2, 5, 4], expected: 1, debug: false, },
+        { nums: [1, 2, 6, -3, 9, 4, 8, 15], expected: 7, debug: false, },
+        { nums: [26, 51, 40, 58, 42, 76, 30, 48, 79, 91], expected: 1, debug: true, },
+        { nums: [81, 27, 39, 71, 54, 88, 85, 90, 93, 93], expected: 5, debug: true, },
+
+    ];
+
+    for (const t of testCases) {
+        // if (t.debug) { debugger };
+        it(`Testing ${t.nums} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(partitionDisjoint(t.nums)).to.equals(t.expected);
         });
     }
 });
