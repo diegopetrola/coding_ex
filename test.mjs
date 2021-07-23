@@ -5,6 +5,7 @@ import {
 import { expect } from 'chai';
 import { pushDominoes } from './utils.mjs';
 import { partitionDisjoint } from './utils.mjs';
+import { pruneTree } from './utils.mjs';
 
 describe('PowerOfThree', function () {
 
@@ -167,6 +168,24 @@ describe('partitionDisjoint', function () {
         it(`Testing ${t.nums} expecting ${t.expected}`, function () {
             if (t.debug) debugger;
             expect(partitionDisjoint(t.nums)).to.equals(t.expected);
+        });
+    }
+});
+
+describe('pruneTree', function () {
+    const testCases = [
+        { root: [1, 1, 0, 1, 1, 0, 1, 0], expected: [1, 1, 0, 1, 1, null, 1], debug: false, },
+        { root: [1, 0, 1, 0, 0, 0, 1], expected: [1, null, 1, null, 1], debug: false, },
+        { root: [1, null, 0, 0, 1], expected: [1, null, 0, null, 1], debug: false, },
+    ];
+
+    for (const t of testCases) {
+        // if (t.debug) { debugger };
+        it(`Testing ${t.root} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                pruneTree(TreeNode.fromArray(t.root)).toArray()
+            ).to.deep.equals(t.expected);
         });
     }
 });

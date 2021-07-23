@@ -4,7 +4,7 @@
   "description": "Some coding exercises in python and js, mostly LeetCode and URI problems",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --g Disjoin"
+    "test": "mocha"
   },
   "type": "module",
   "keywords": [

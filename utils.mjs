@@ -196,6 +196,59 @@ export class TreeNode {
         this.val = val;
         this.left = this.right = null;
     }
+
+    /**
+     * Converts a binary tree to an Array
+     * @returns {Array}
+     */
+    toArray() {
+        let ar = [];
+        let stack = [this];
+
+        while (stack.length > 0) {
+            let new_stack = [];
+            for (let i = 0; i < stack.length; i++) {
+
+                ar.push(stack[i] ? stack[i].val : null);
+                if (stack[i] !== null && stack[i].left === null && stack[i].right === null) continue;
+                if (stack[i] !== null) {
+                    new_stack.push(stack[i].left);
+                    new_stack.push(stack[i].right);
+                }
+            }
+            stack = new_stack;
+        }
+        return ar;
+    }
+
+    /**
+     * Converts an array into a binary tree
+     * @param {Array} ar 
+     * @returns {TreeNode}
+     */
+    static fromArray(ar, i = 0) {
+        function addFromArray(ar, index) {
+            if (index >= ar.length || ar[index] === null) return null;
+            return new TreeNode(ar[index]);
+        }
+
+        if (ar.length == 0) return null;
+        let root = new TreeNode(ar[0]);
+        let stack = [root];
+        let j = 1;
+        while (stack.length > 0) {
+            let new_stack = []
+            for (let i = 0; i < stack.length; i++) {
+                if (stack[i] !== null) {
+                    stack[i].left = addFromArray(ar, j++);
+                    stack[i].right = addFromArray(ar, j++);
+                    new_stack.push(stack[i].left, stack[i].right);
+                }
+            }
+            stack = new_stack;
+        }
+        return root;
+    }
 }
 
 
@@ -333,4 +386,25 @@ export function partitionDisjoint(nums) {
 
     return partition.i;
 
+};
+
+/**
+ * LeetCode: Binary Tree Pruning
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+export function pruneTree(root) {
+    if (root === null) return null;
+    if (root.left == null && root.right == null) {
+        if (root.val == 1) return root;
+        return null;
+    }
+
+    root.left = pruneTree(root.left);
+    root.right = pruneTree(root.right);
+
+    if (root.left === null && root.right === null && root.val == 0)
+        root = null;
+
+    return root;
 };
