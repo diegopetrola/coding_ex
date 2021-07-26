@@ -6,6 +6,7 @@ import { expect } from 'chai';
 import { pushDominoes } from './utils.mjs';
 import { partitionDisjoint } from './utils.mjs';
 import { pruneTree } from './utils.mjs';
+import { sortedArrayToBST } from './utils.mjs';
 
 describe('PowerOfThree', function () {
 
@@ -119,7 +120,6 @@ describe('lowestCommonAncestor', function () {
     ];
 
     for (const t of testCases) {
-        // if (t.debug) { debugger };
         it(`Testing ${t.root.val} expecting ${t.expected}`, function () {
             if (t.debug) debugger;
             expect(
@@ -140,7 +140,6 @@ describe('pushDominoes', function () {
     ];
 
     for (const t of testCases) {
-        // if (t.debug) { debugger };
         it(`Testing ${t.dominoes} expecting ${t.expected}`, function () {
             if (t.debug) debugger;
             expect(pushDominoes(t.dominoes)).to.equals(t.expected);
@@ -164,7 +163,6 @@ describe('partitionDisjoint', function () {
     ];
 
     for (const t of testCases) {
-        // if (t.debug) { debugger };
         it(`Testing ${t.nums} expecting ${t.expected}`, function () {
             if (t.debug) debugger;
             expect(partitionDisjoint(t.nums)).to.equals(t.expected);
@@ -180,11 +178,49 @@ describe('pruneTree', function () {
     ];
 
     for (const t of testCases) {
-        // if (t.debug) { debugger };
         it(`Testing ${t.root} expecting ${t.expected}`, function () {
             if (t.debug) debugger;
             expect(
                 pruneTree(TreeNode.fromArray(t.root)).toArray()
+            ).to.deep.equals(t.expected);
+        });
+    }
+});
+
+describe('pruneTree', function () {
+    const testCases = [
+        { root: [1, 1, 0, 1, 1, 0, 1, 0], expected: [1, 1, 0, 1, 1, null, 1], debug: false, },
+        { root: [1, 0, 1, 0, 0, 0, 1], expected: [1, null, 1, null, 1], debug: false, },
+        { root: [1, null, 0, 0, 1], expected: [1, null, 0, null, 1], debug: false, },
+    ];
+
+    for (const t of testCases) {
+        it(`Testing ${t.root} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                pruneTree(TreeNode.fromArray(t.root)).toArray()
+            ).to.deep.equals(t.expected);
+        });
+    }
+});
+
+describe('sortedArrayToBST', function () {
+    const testCases = [
+        {
+            nums: [1, 2, 3, 5, 9],
+            expected: [
+                3, 2, 9,
+                1, null, 5,
+                null
+            ], debug: false,
+        },
+    ];
+
+    for (const t of testCases) {
+        it(`Testing ${t.nums} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                sortedArrayToBST(t.nums).toArray()
             ).to.deep.equals(t.expected);
         });
     }

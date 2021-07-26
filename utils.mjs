@@ -1,5 +1,7 @@
 "use strict";
 
+import _ from "lodash";
+
 /**
 * LeetCode: Is Power of Three
 * @param {number} n
@@ -192,9 +194,16 @@ export function reverseKGroup(head, k) {
  * Definition of a node for binary tree
  */
 export class TreeNode {
-    constructor(val) {
+    /**
+     * 
+     * @param val 
+     * @param {TreeNode} parent 
+     */
+    constructor(val, parent = null, left = null, right = null) {
         this.val = val;
-        this.left = this.right = null;
+        this.parent = parent;
+        this.left = left;
+        this.right = right;
     }
 
     /**
@@ -407,4 +416,21 @@ export function pruneTree(root) {
         root = null;
 
     return root;
+};
+
+/**
+ * @param {number[]} nums
+ * @param {number} start
+ * @param {number} end
+ * @return {TreeNode}
+ */
+export function sortedArrayToBST(nums, start = 0, end = nums.length) {
+    if (start == end) return null;
+    if (end - start == 1) return new TreeNode(nums[start]);
+
+    const middle = Number.parseInt((start + end) / 2);
+    const node = new TreeNode(nums[middle]);
+    node.left = sortedArrayToBST(nums, start, middle);
+    node.right = sortedArrayToBST(nums, middle + 1, end);
+    return node;
 };
