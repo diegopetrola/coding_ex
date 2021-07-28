@@ -419,6 +419,7 @@ export function pruneTree(root) {
 };
 
 /**
+ * LeetCode: Convert Sorted Array to Binary Search Tree
  * @param {number[]} nums
  * @param {number} start
  * @param {number} end
@@ -433,4 +434,90 @@ export function sortedArrayToBST(nums, start = 0, end = nums.length) {
     node.left = sortedArrayToBST(nums, start, middle);
     node.right = sortedArrayToBST(nums, middle + 1, end);
     return node;
+};
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+export function threeSumClosest(nums, target) {
+    let bestSum = Infinity;
+    nums.sort((a, b) => a - b);
+
+    for (let i = 0; i < nums.length; i++) {
+        let start = i + 1;
+        let end = nums.length - 1;
+        while (start < end) {
+            const sum = nums[i] + nums[start] + nums[end];
+            const compare = sum - target;
+            if (compare == 0) {
+                return sum;
+            } else if (compare > 0) {
+                end--;
+            } else {
+                start++;
+            }
+            if (Math.abs(compare) < Math.abs(bestSum - target)) {
+                bestSum = sum;
+            }
+        }
+    }
+    return bestSum;
+};
+
+/**
+ * LeetCode: Beautiful Array
+ * @param {number} n
+ * @return {number[]}
+ */
+export function beautifulArray(n) {
+    let ar = [1];
+
+    while (ar.length < n) {
+        let new_ar = [];
+        for (let i = 0; i < ar.length; i++) {
+            const odd = 2 * ar[i] - 1;
+            if (odd <= n) new_ar.push(odd);
+        }
+        for (let i = 0; i < ar.length; i++) {
+            const even = 2 * ar[i];
+            if (even <= n) new_ar.push(even);
+        }
+        ar = new_ar;
+    }
+
+    return ar;
+};
+
+/**
+ * LeetCode: telephone letter combination
+ * @param {string} digits
+ * @return {string[]}
+ */
+export function letterCombinations(digits) {
+    const d = {
+        '2': ['a', 'b', 'c'],
+        '3': ['d', 'e', 'f'],
+        '4': ['g', 'h', 'i'],
+        '5': ['j', 'k', 'l'],
+        '6': ['m', 'n', 'o'],
+        '7': ['p', 'q', 'r', 's'],
+        '8': ['t', 'u', 'v'],
+        '9': ['w', 'x', 'y', 'z'],
+    }
+    if (digits == '') return [];
+
+    debugger;
+    let stack = d[digits[0]];
+    for (let i = 1; i < digits.length; i++) {
+        let new_stack = [];
+        for (let j = 0; j < stack.length; j++) {
+            for (const digit of d[digits[i]]) {
+                new_stack.push(stack[j] + digit);
+            }
+        }
+        stack = new_stack;
+    }
+    return stack;
 };

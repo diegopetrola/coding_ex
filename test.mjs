@@ -7,6 +7,7 @@ import { pushDominoes } from './utils.mjs';
 import { partitionDisjoint } from './utils.mjs';
 import { pruneTree } from './utils.mjs';
 import { sortedArrayToBST } from './utils.mjs';
+import { threeSumClosest } from './utils.mjs';
 
 describe('PowerOfThree', function () {
 
@@ -222,6 +223,23 @@ describe('sortedArrayToBST', function () {
             expect(
                 sortedArrayToBST(t.nums).toArray()
             ).to.deep.equals(t.expected);
+        });
+    }
+});
+
+describe('threeSumClosest', function () {
+    const testCases = [
+        { nums: [-1, 2, 1, -4], target: 1, expected: 2, },
+        { nums: [-5, 4, 0, 2], target: 3, expected: 1, },
+        { nums: [1, 2, 4, 8, 16, 32, 64, 128], target: 82, expected: 82, }
+    ];
+
+    for (const t of testCases) {
+        it(`Testing ${t.nums} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                threeSumClosest(t.nums, t.target)
+            ).to.equals(t.expected);
         });
     }
 });
