@@ -521,3 +521,49 @@ export function letterCombinations(digits) {
     }
     return stack;
 };
+
+/**
+ * @param {number[][]} mat
+ * @return {number[][]}
+ */
+export function updateMatrix(mat) {
+    function add_to_stack(mat, stack, i, j) {
+        if (i > -1 && i < mat.length && j > -1 && j < mat[0].length
+            && stack[`${i},${j}`] === undefined)
+            stack[`${i},${j}`] = [i, j];
+    }
+
+    let res = new Array(mat.length);
+    for (let i = 0; i < res.length; i++) {
+        res[i] = new Array(mat[0].length);
+    }
+
+    let stack = {};
+    let dist = 0;
+    for (let o_i = 0; o_i < mat.length; o_i++) {
+        for (let o_j = 0; o_j < mat[0].length; o_j++) {
+            stack[`${o_i},${o_j}`] = [o_i, o_j];
+            let new_stack = {};
+            dist = 0;
+            let keys = Object.values(stack);
+            while (keys.length > 0) {
+                for (const pair of keys) {
+                    if (mat[pair[0]][pair[1]] === 0) {
+                        res[o_i][o_j] = dist;
+                        new_stack = {};
+                        break;
+                    } else {
+                        add_to_stack(mat, new_stack, pair[0] + 1, pair[1]);
+                        add_to_stack(mat, new_stack, pair[0] - 1, pair[1]);
+                        add_to_stack(mat, new_stack, pair[0], pair[1] + 1);
+                        add_to_stack(mat, new_stack, pair[0], pair[1] - 1);
+                    }
+                }
+                dist++;
+                stack = new_stack;
+                keys = Object.values(stack);
+            }
+        }
+    }
+    return res;
+};

@@ -8,6 +8,7 @@ import { partitionDisjoint } from './utils.mjs';
 import { pruneTree } from './utils.mjs';
 import { sortedArrayToBST } from './utils.mjs';
 import { threeSumClosest } from './utils.mjs';
+import { updateMatrix } from './utils.mjs';
 
 describe('PowerOfThree', function () {
 
@@ -240,6 +241,26 @@ describe('threeSumClosest', function () {
             expect(
                 threeSumClosest(t.nums, t.target)
             ).to.equals(t.expected);
+        });
+    }
+});
+
+describe('updateMatrix', function () {
+    const testCases = [
+        { mat: [[0, 0, 0], [0, 1, 0], [1, 1, 1]], expected: [[0, 0, 0], [0, 1, 0], [1, 2, 1]] },
+        { mat: [[0, 0, 0], [0, 1, 0], [0, 0, 0]], expected: [[0, 0, 0], [0, 1, 0], [0, 0, 0]] },
+        {
+            mat: [[0, 1, 0, 0, 0], [0, 1, 0, 1, 0], [1, 1, 1, 0, 0], [1, 0, 0, 0, 0], [1, 1, 1, 1, 0], [1, 1, 1, 1, 1], [1, 1, 1, 0, 0]],
+            expected: [[0, 1, 0, 0, 0], [0, 1, 0, 1, 0], [1, 1, 1, 0, 0], [1, 0, 0, 0, 0], [2, 1, 1, 1, 0], [3, 2, 2, 1, 1], [3, 2, 1, 0, 0]]
+        }
+    ];
+
+    for (const t of testCases) {
+        it(`Testing ${t.mat} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                updateMatrix(t.mat)
+            ).to.deep.equals(t.expected);
         });
     }
 });
