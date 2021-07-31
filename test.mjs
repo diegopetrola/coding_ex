@@ -9,6 +9,7 @@ import { pruneTree } from './utils.mjs';
 import { sortedArrayToBST } from './utils.mjs';
 import { threeSumClosest } from './utils.mjs';
 import { updateMatrix } from './utils.mjs';
+import { trap } from "./utils.mjs";
 
 describe('PowerOfThree', function () {
 
@@ -261,6 +262,29 @@ describe('updateMatrix', function () {
             expect(
                 updateMatrix(t.mat)
             ).to.deep.equals(t.expected);
+        });
+    }
+});
+
+describe('trapWater', function () {
+    const testCases = [
+        { height: [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1], expected: 6 },
+        { height: [4, 2, 0, 3, 2, 5], expected: 9 },
+        { height: [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1], expected: 6 },
+        { height: [0, 5, 3, 2, 2, 4, 3, 3, 7], expected: 13 },
+        { height: [0, 0, 0, 0], expected: 0 },
+        { height: [0, 7, 0, 1], expected: 1 },
+        { height: [0, 0, 0, 1], expected: 0 },
+        { height: [0, 5, 1, 2, 8, 9, 11, 3, 7], expected: 11 },
+        { height: [5, 4, 1, 2], expected: 1 },
+    ];
+
+    for (const t of testCases) {
+        it(`Testing ${t.height} expecting ${t.expected}`, function () {
+            if (t.debug) debugger;
+            expect(
+                trap(t.height)
+            ).to.equals(t.expected);
         });
     }
 });

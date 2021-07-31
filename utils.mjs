@@ -567,3 +567,97 @@ export function updateMatrix(mat) {
     }
     return res;
 };
+
+/**
+ * 
+ */
+export class MapSum {
+    constructor() {
+        this.dict = {};
+        this.keys = [];
+    }
+
+};
+
+/** 
+ * @param {string} key 
+ * @param {number} val
+ * @return {void}
+ */
+MapSum.prototype.insert = function (key, val) {
+    if (this.dict[key] === undefined) {
+        this.keys.push(key);
+        this.keys.sort();
+    }
+    this.dict[key] = val;
+};
+
+/** 
+ * @param {string} prefix
+ * @return {number}
+ */
+MapSum.prototype.sum = function (prefix) {
+    let re = new RegExp("^" + prefix);
+    let index = this.keys.findIndex((val) => re.test(val));
+    let sum = 0;
+    if (index > -1 && index < this.keys.length) {
+        while (re.test(this.keys[index])) {
+            sum += this.dict[this.keys[index]];
+            index++;
+        }
+    }
+    return sum;
+};
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+export function trap(height) {
+    if (height.length == 0) return 0;
+    let s = 0;
+    let e = height.length - 1;
+    let level = Math.min(height[0], height[height.length - 1]);
+    let vol = level * (height.length - 1);
+    let i = height[e] > height[s] ? s : e;
+    while (s < e) {
+        vol -= Math.min(level, height[i]);
+        if (height[i] > level) {
+            const new_level = Math.min(height[s], height[e]);
+            vol += (new_level - level) * (e - s - 1);
+            level = new_level;
+        }
+        if (height[s] > height[e]) {
+            e--;
+            i = e;
+        } else {
+            s++;
+            i = s;
+        }
+    }
+
+    return vol;
+
+
+    // let start = 0;
+    // let totalVol = height[0] * (height.length - 2);
+    // let vol = 0;
+    // debugger;
+    // for (let i = 1; i < height.length; i++) {
+    //     if (height[i] >= height[start]) {
+    //         totalVol += vol;
+    //         vol = 0;
+    //         start = i;
+    //     } else {
+    //         if (height[i] <= height[i - 1])
+    //             vol += height[start] - height[i];
+    //         else if (height[i] > height[i - 1]) {
+    //             const volDiff = vol - (height[start] - height[i]) * (i - 1 - start);
+    //             totalVol += volDiff;
+    //             vol += height[start] - height[i];
+    //             vol -= volDiff;
+    //         }
+    //     }
+    // }
+    // return totalVol;
+};
