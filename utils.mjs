@@ -618,10 +618,11 @@ export var search = function (nums, target) {
   let j = nums.length;
 
   while (i <= j) {
-    let index = Math.floor(i + (i - j) / 2);
-    if (nums[index] < target) j = index;
-    else if (nums[index] > target) i = index;
-    else return index;
+    let index = Math.floor(i + (j - i) / 2);
+    if (index < 0 || index > nums.length - 1) break;
+    if (nums[index] < target) i = index + 1;
+    else if (nums[index] > target) j = index - 1;
+    else if (nums[index] == target) return index;
   }
   return -1;
 };
