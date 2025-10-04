@@ -8,6 +8,7 @@ import {
   TreeNode,
   lowestCommonAncestor,
   search,
+  searchInsert,
 } from "./utils.mjs";
 import { expect } from "chai";
 import { pushDominoes } from "./utils.mjs";
@@ -351,6 +352,25 @@ describe("search", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.expected}`, function () {
       expect(search(t.p1, t.p2)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("searchInsert", function () {
+  const testCases = [
+    { p1: [-1, 0, 3, 5, 9, 12], p2: 9, expected: 4 },
+    { p1: [-1, 0, 3, 5, 9, 12], p2: 2, expected: 2 },
+    { p1: [-1, 0, 3, 5, 9, 12], p2: 13, expected: 6 },
+    { p1: [-1, 0, 3, 5, 9, 12], p2: -2, expected: 0 },
+    { p1: [1, 3, 5, 6], p2: 5, expected: 2 },
+    { p1: [1, 3, 5, 6], p2: 2, expected: 1 },
+    { p1: [1, 3, 5, 6], p2: 7, expected: 4 },
+    { p1: [1, 3], p2: 2, expected: 1 },
+  ];
+  // const testCases = [{ p1: [1, 3], p2: 2, expected: 1 }];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
+      expect(searchInsert(t.p1, t.p2)).to.equals(t.expected);
     });
   }
 });

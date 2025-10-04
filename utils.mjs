@@ -628,6 +628,26 @@ export var search = function (nums, target) {
 };
 
 /**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+export var searchInsert = function (nums, target) {
+  let i = 0;
+  let j = nums.length - 1;
+  const getIndex = (i, j) => Math.floor(i + (j - i) / 2);
+
+  let index = getIndex(i, j);
+  while (i <= j) {
+    index = getIndex(i, j);
+    if (nums[index] < target) i = index + 1;
+    else if (nums[index] > target) j = index - 1;
+    else if (nums[index] == target) return index;
+  }
+  return target > nums[index] ? index + 1 : index;
+};
+
+/**
  * @param {number[]} height
  * @return {number}
  */
