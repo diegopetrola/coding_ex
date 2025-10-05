@@ -1,4 +1,5 @@
 import {
+  searchRot,
   isPowerOfThree,
   romanToInt,
   hammingDistance,
@@ -371,6 +372,28 @@ describe("searchInsert", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
       expect(searchInsert(t.p1, t.p2)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("searchRot", function () {
+  const testCases = [
+    { p1: [-1, 0, 3, 5, 9, 12], p2: 9, expected: 4 },
+    { p1: [-1, 0, 3, 5, 9, 12], p2: 2, expected: -1 },
+    { p1: [-1, 0, 3, 5, 9, 12], p2: 13, expected: -1 },
+    { p1: [-1, 0, 3, 5, 9, 12], p2: -2, expected: -1 },
+    { p1: [1, 3, 5, 6], p2: 5, expected: 2 },
+    { p1: [1, 3, 5, 6], p2: 2, expected: -1 },
+    { p1: [1, 3, 5, 6], p2: 7, expected: -1 },
+    { p1: [1, 3], p2: 2, expected: -1 },
+    { p1: [4, 5, 6, 7, 0, 1, 2], p2: 0, expected: 4 },
+    { p1: [4, 5, 6, 7, 0, 1, 2], p2: 3, expected: -1 },
+    { p1: [1], p2: 0, expected: -1 },
+  ];
+  // const testCases = [{ p1: [1, 3], p2: 2, expected: 1 }];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
+      expect(searchRot(t.p1, t.p2)).to.equals(t.expected);
     });
   }
 });

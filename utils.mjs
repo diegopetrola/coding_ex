@@ -648,6 +648,34 @@ export var searchInsert = function (nums, target) {
 };
 
 /**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+export var searchRot = function (nums, target) {
+  let k = 0;
+  const transformIndex = (i) => (i + k) % nums.length;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < nums[i - 1]) {
+      k = i;
+      break;
+    }
+  }
+
+  let i = 0;
+  let j = nums.length - 1;
+  const getIndex = (i, j) => Math.floor(i + (j - i) / 2);
+  while (i <= j) {
+    let index = getIndex(i, j);
+    let tIndex = transformIndex(index);
+    if (nums[tIndex] > target) j = index - 1;
+    else if (nums[tIndex] < target) i = index + 1;
+    else if (nums[tIndex] == target) return tIndex;
+  }
+  return -1;
+};
+
+/**
  * @param {number[]} height
  * @return {number}
  */
