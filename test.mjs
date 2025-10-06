@@ -1,4 +1,5 @@
 import {
+  findMin,
   searchRot,
   isPowerOfThree,
   romanToInt,
@@ -394,6 +395,27 @@ describe("searchRot", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
       expect(searchRot(t.p1, t.p2)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("findMin", function () {
+  // const testCases = [
+  //   { p1: [-1, 0, 3, 5, 9, 12], expected: -1 },
+  //   { p1: [-1, 0, 3, 5, 9, 12], expected: -1 },
+  //   { p1: [1, 3, 5, 6], expected: 1 },
+  //   { p1: [1, 3, 5, 6], expected: 1 },
+  //   { p1: [1, 3], expected: 1 },
+  //   { p1: [4, 5, 6, 7, 0, 1, 2], expected: 0 },
+  //   { p1: [4, 5, 6, 7, 0, 1, 2], expected: 0 },
+  //   { p1: [1], expected: 1 },
+  //   { p1: [3, 4, 5, 1, 2], expected: 1 },
+  //   { p1: [3, 4, 5, 6, 7, 0, 1, 2], expected: 0 },
+  // ];
+  const testCases = [{ p1: [4, 5, 1, 2, 3], expected: 1 }];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
+      expect(findMin(t.p1, t.p2)).to.equals(t.expected);
     });
   }
 });

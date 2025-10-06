@@ -676,6 +676,34 @@ export var searchRot = function (nums, target) {
 };
 
 /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+export var findMin = function (nums) {
+  let i = 0;
+  let j = nums.length - 1;
+  let min = nums[0];
+  const getIndex = (i, j) => Math.floor(i + (j - i) / 2);
+  const getSmallerIndex = (i, j, k) => {
+    if (nums[i] <= nums[j] && nums[i] <= nums[k]) return i;
+    if (nums[j] <= nums[i] && nums[j] <= nums[k]) return j;
+    if (nums[k] <= nums[i] && nums[k] <= nums[j]) return k;
+  };
+
+  while (i < j) {
+    let index = getIndex(i, j);
+    let smallerI = getSmallerIndex(i, j, index);
+    min = Math.min(nums[i], nums[j], nums[index], min);
+    if (smallerI > index) {
+      i = index + 1;
+    } else if (smallerI <= index) {
+      j = index - 1;
+    }
+  }
+  return min;
+};
+
+/**
  * @param {number[]} height
  * @return {number}
  */
