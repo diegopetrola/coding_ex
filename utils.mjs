@@ -635,7 +635,7 @@ export var search = function (nums, target) {
 export var searchInsert = function (nums, target) {
   let i = 0;
   let j = nums.length - 1;
-  const getIndex = (i, j) => Math.floor(i + (j - i) / 2);
+  const getIndex = (i, j) => Math.floor((j + i) / 2);
 
   let index = getIndex(i, j);
   while (i <= j) {
@@ -664,7 +664,7 @@ export var searchRot = function (nums, target) {
 
   let i = 0;
   let j = nums.length - 1;
-  const getIndex = (i, j) => Math.floor(i + (j - i) / 2);
+  const getIndex = (i, j) => Math.floor((j + i) / 2);
   while (i <= j) {
     let index = getIndex(i, j);
     let tIndex = transformIndex(index);
@@ -683,7 +683,7 @@ export var findMin = function (nums) {
   let i = 0;
   let j = nums.length - 1;
   let min = nums[0];
-  const getIndex = (i, j) => Math.floor(i + (j - i) / 2);
+  const getIndex = (i, j) => Math.floor((j + i) / 2);
   const getSmallerIndex = (i, j, k) => {
     if (nums[i] <= nums[j] && nums[i] <= nums[k]) return i;
     if (nums[j] <= nums[i] && nums[j] <= nums[k]) return j;
@@ -701,6 +701,31 @@ export var findMin = function (nums) {
     }
   }
   return min;
+};
+
+/**
+ * @param {number[]} piles
+ * @param {number} h
+ * @return {number}
+ */
+export var minEatingSpeed = function (piles, h) {
+  const getH = (k) => {
+    let res = 0;
+    for (let i = 0; i < piles.length; i++) {
+      res += Math.ceil(piles[i] / k);
+    }
+    return res;
+  };
+  let kmin = 1;
+  let kmax = piles.reduce((v, c) => Math.max(v, c));
+  let k = Math.floor((kmax - kmin) / 2);
+  while (kmin < kmax) {
+    k = Math.floor((kmax + kmin) / 2);
+    let hours = getH(k);
+    if (hours <= h) kmax = k;
+    else if (hours > h) kmin = k + 1;
+  }
+  return kmin;
 };
 
 /**
