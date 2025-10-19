@@ -1,4 +1,5 @@
 import {
+  exist,
   subsetsWithDup,
   permute,
   minEatingSpeed,
@@ -107,9 +108,9 @@ describe("reverseKGroup", function () {
 
   for (const t of testCases) {
     it(`Testing ${t.ar} expecting ${t.expected}`, function () {
-      expect(
-        reverseKGroup(arrayToListNode(t.ar), t.k).toArray()
-      ).to.deep.equals(t.expected);
+      expect(reverseKGroup(arrayToListNode(t.ar), t.k).toArray()).to.deep.equals(
+        t.expected
+      );
     });
   }
 });
@@ -466,6 +467,61 @@ describe("subsetsWithDup", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.expected}`, function () {
       expect(subsetsWithDup(t.p1).length).to.equals(t.expected);
+    });
+  }
+});
+
+describe("existBoard", function () {
+  const testCases = [
+    {
+      p1: [
+        ["A", "B", "C", "E"],
+        ["S", "F", "C", "S"],
+        ["A", "D", "E", "E"],
+      ],
+      p2: "ABCCED",
+      expected: true,
+    },
+    {
+      p1: [
+        ["A", "B", "C", "E"],
+        ["S", "F", "C", "S"],
+        ["A", "D", "E", "E"],
+      ],
+      p2: "SEE",
+      expected: true,
+    },
+    {
+      p1: [
+        ["A", "B", "C", "E"],
+        ["S", "F", "C", "S"],
+        ["A", "D", "E", "E"],
+      ],
+      p2: "ABCB",
+      expected: false,
+    },
+    { p1: [["a", "b"]], p2: "ba", expected: true },
+    {
+      p1: [
+        ["a", "b"],
+        ["c", "d"],
+      ],
+      p2: "cdba",
+      expected: true,
+    },
+    {
+      p1: [
+        ["A", "B", "C", "E"],
+        ["S", "F", "E", "S"],
+        ["A", "D", "E", "E"],
+      ],
+      p2: "ABCESEEEFS",
+      expected: true,
+    },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.expected}`, function () {
+      expect(exist(t.p1, t.p2)).to.equals(t.expected);
     });
   }
 });

@@ -804,6 +804,45 @@ export var permute = function (nums) {
 };
 
 /**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+export var exist = function (board, word) {
+  const _exist = (index, i, j) => {
+    if (
+      i < 0 ||
+      j < 0 ||
+      i > board.length - 1 ||
+      j > board[0].length - 1 ||
+      word[index] != board[i][j]
+    )
+      return false;
+    if (board[i][j] == word[index] && index == word.length - 1) {
+      return true;
+    }
+
+    let orgChar = board[i][j];
+    board[i][j] = "#";
+    let res =
+      _exist(index + 1, i + 1, j) ||
+      _exist(index + 1, i - 1, j) ||
+      _exist(index + 1, i, j + 1) ||
+      _exist(index + 1, i, j - 1);
+    board[i][j] = orgChar;
+    return res;
+  };
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[0].length; j++) {
+      if (_exist(0, i, j)) return true;
+    }
+  }
+
+  return false;
+};
+
+/**
  * @param {number[]} height
  * @return {number}
  */
