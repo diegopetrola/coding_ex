@@ -1,4 +1,6 @@
 import {
+  subsetsWithDup,
+  permute,
   minEatingSpeed,
   findMin,
   searchRot,
@@ -12,6 +14,7 @@ import {
   lowestCommonAncestor,
   search,
   searchInsert,
+  subsets,
 } from "./utils.mjs";
 import { expect } from "chai";
 import { pushDominoes } from "./utils.mjs";
@@ -412,10 +415,11 @@ describe("findMin", function () {
   ];
   for (const t of testCases) {
     it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
-      expect(findMin(t.p1, t.p2)).to.equals(t.expected);
+      expect(findMin(t.p1)).to.equals(t.expected);
     });
   }
 });
+
 describe("minEatingSpeed", function () {
   const testCases = [
     { p1: [30, 11, 23, 4, 20], p2: 6, expected: 23 },
@@ -426,6 +430,42 @@ describe("minEatingSpeed", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} and ${t.p2} expecting ${t.expected}`, function () {
       expect(minEatingSpeed(t.p1, t.p2)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("subsets", function () {
+  const testCases = [
+    { p1: [1, 2], expected: 4 },
+    { p1: [1, 2, 3], expected: 8 },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.expected}`, function () {
+      expect(subsets(t.p1).length).to.equals(t.expected);
+    });
+  }
+});
+
+describe("permute", function () {
+  const testCases = [
+    // { p1: [1, 2], expected: 2 },
+    { p1: [1, 2, 3], expected: 6 },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.expected}`, function () {
+      expect(permute(t.p1).length).to.equals(t.expected);
+    });
+  }
+});
+
+describe("subsetsWithDup", function () {
+  const testCases = [
+    { p1: [1, 2, 2], expected: 6 },
+    { p1: [0], expected: 2 },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.expected}`, function () {
+      expect(subsetsWithDup(t.p1).length).to.equals(t.expected);
     });
   }
 });

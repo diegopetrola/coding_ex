@@ -729,6 +729,81 @@ export var minEatingSpeed = function (piles, h) {
 };
 
 /**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+export var subsets = function (nums) {
+  const curSubset = [];
+  const subsets = [];
+  /**
+   * @param {number} startIndex
+   */
+  function _sub(startIndex) {
+    subsets.push([...curSubset]);
+    for (let i = startIndex; i < nums.length; i++) {
+      curSubset.push(nums[i]);
+      _sub(i + 1);
+      curSubset.pop();
+    }
+  }
+
+  _sub(0);
+  return subsets;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+export var subsetsWithDup = function (nums) {
+  const curSubset = [];
+  const subsets = [];
+  nums.sort((a, b) => a - b);
+
+  function _sub(startIndex) {
+    if (startIndex == nums.length) {
+      subsets.push([...curSubset]);
+      return;
+    }
+
+    curSubset.push(nums[startIndex]);
+    _sub(startIndex + 1);
+    curSubset.pop();
+    while (
+      startIndex + 1 < nums.length &&
+      nums[startIndex] == nums[startIndex + 1]
+    )
+      startIndex++;
+    _sub(startIndex + 1);
+  }
+
+  _sub(0);
+  return subsets;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+export var permute = function (nums) {
+  const permutations = [];
+
+  const back = (startIndex) => {
+    if (startIndex == nums.length) {
+      permutations.push([...nums]);
+    }
+    for (let i = startIndex; i < nums.length; i++) {
+      [nums[startIndex], nums[i]] = [nums[i], nums[startIndex]];
+      back(startIndex + 1);
+      [nums[startIndex], nums[i]] = [nums[i], nums[startIndex]];
+    }
+  };
+
+  back(0);
+  return permutations;
+};
+
+/**
  * @param {number[]} height
  * @return {number}
  */
@@ -756,26 +831,4 @@ export function trap(height) {
   }
 
   return vol;
-
-  // let start = 0;
-  // let totalVol = height[0] * (height.length - 2);
-  // let vol = 0;
-  // debugger;
-  // for (let i = 1; i < height.length; i++) {
-  //     if (height[i] >= height[start]) {
-  //         totalVol += vol;
-  //         vol = 0;
-  //         start = i;
-  //     } else {
-  //         if (height[i] <= height[i - 1])
-  //             vol += height[start] - height[i];
-  //         else if (height[i] > height[i - 1]) {
-  //             const volDiff = vol - (height[start] - height[i]) * (i - 1 - start);
-  //             totalVol += volDiff;
-  //             vol += height[start] - height[i];
-  //             vol -= volDiff;
-  //         }
-  //     }
-  // }
-  // return totalVol;
 }
