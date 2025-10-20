@@ -818,9 +818,8 @@ export var exist = function (board, word) {
       word[index] != board[i][j]
     )
       return false;
-    if (board[i][j] == word[index] && index == word.length - 1) {
-      return true;
-    }
+
+    if (board[i][j] == word[index] && index == word.length - 1) return true;
 
     let orgChar = board[i][j];
     board[i][j] = "#";
@@ -871,3 +870,39 @@ export function trap(height) {
 
   return vol;
 }
+
+/**
+ * @param {string} s
+ * @return {string[][]}
+ */
+export var partition = function (s) {
+  const res = [];
+  const cur = [];
+
+  const isPalindrome = (s, i, j) => {
+    while (i < j) {
+      if (s[i] != s[j]) return false;
+      i++;
+      j--;
+    }
+    return true;
+  };
+
+  const dfs = (i) => {
+    if (i >= s.length) {
+      res.push([...cur]);
+      return;
+    }
+
+    for (let j = i; j < s.length; j++) {
+      if (isPalindrome(s, i, j)) {
+        cur.push(s.substring(i, j + 1));
+        dfs(j + 1);
+        cur.pop();
+      }
+    }
+  };
+
+  dfs(0);
+  return res;
+};

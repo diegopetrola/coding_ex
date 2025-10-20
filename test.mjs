@@ -1,4 +1,5 @@
 import {
+  partition,
   exist,
   subsetsWithDup,
   permute,
@@ -522,6 +523,18 @@ describe("existBoard", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.expected}`, function () {
       expect(exist(t.p1, t.p2)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("partition131", function () {
+  const testCases = [
+    { p1: "aabc", expected: 2 }, // [["aa", "b", "c"], ["a", "b", "c"]]
+    { p1: "a", expected: 1 },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.expected}`, function () {
+      expect(partition(t.p1).length).to.equals(t.expected);
     });
   }
 });
