@@ -914,7 +914,7 @@ export var partition = function (s) {
 export var splitString = function (s) {
   let res = false;
 
-  function bfs(sIndex, split) {
+  function dfs(sIndex, split) {
     if (res) return;
     for (let i = 0; i < split.length - 1; i++) {
       if (split[i] - 1 != split[i + 1]) return;
@@ -926,11 +926,37 @@ export var splitString = function (s) {
 
     for (let i = sIndex; i < s.length; i++) {
       split.push(Number(s.substring(sIndex, i + 1)));
-      bfs(i + 1, split);
+      dfs(i + 1, split);
       split.pop();
     }
   }
 
-  bfs(0, []);
+  dfs(0, []);
+  return res;
+};
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+export var combinationSum = function (candidates, target) {
+  const res = [];
+  const cur = [];
+
+  function dfs(cTarget, index) {
+    if (cTarget < 0 || index >= candidates.length) return;
+    if (cTarget == 0) {
+      res.push([...cur]);
+      return;
+    }
+
+    for (let i = index; i < candidates.length; i++) {
+      cur.push(candidates[i]);
+      dfs(cTarget - candidates[i], i);
+      cur.pop();
+    }
+  }
+  dfs(target, 0);
   return res;
 };

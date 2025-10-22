@@ -1,4 +1,5 @@
 import {
+  combinationSum,
   splitString,
   partition,
   exist,
@@ -551,6 +552,27 @@ describe("splitString", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.expected}`, function () {
       expect(splitString(t.p1)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("combinationSum", function () {
+  const testCases = [
+    { p1: [2, 3, 6, 7], target: 7, expected: [[2, 2, 3], [7]] },
+    {
+      p1: [2, 3, 5],
+      target: 8,
+      expected: [
+        [2, 2, 2, 2],
+        [2, 3, 3],
+        [3, 5],
+      ],
+    },
+    { p1: [2], target: 1, expected: [] },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} and ${t.target} expecting ${t.expected}`, function () {
+      expect(combinationSum(t.p1, t.target).length).to.equals(t.expected.length);
     });
   }
 });
