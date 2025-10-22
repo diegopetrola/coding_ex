@@ -1,4 +1,5 @@
 import {
+  climbStairsFib,
   combinationSum,
   splitString,
   partition,
@@ -573,6 +574,21 @@ describe("combinationSum", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} and ${t.target} expecting ${t.expected}`, function () {
       expect(combinationSum(t.p1, t.target).length).to.equals(t.expected.length);
+    });
+  }
+});
+
+describe("climbStairs", function () {
+  const testCases = [
+    { p1: 2, expected: 2 },
+    { p1: 3, expected: 3 },
+    { p1: 4, expected: 5 },
+    { p1: 5, expected: 8 },
+  ];
+
+  for (const t of testCases) {
+    it(`Testing ${t.p1}  expecting ${t.expected}`, function () {
+      expect(climbStairsFib(t.p1)).to.equals(t.expected);
     });
   }
 });

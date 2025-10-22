@@ -960,3 +960,44 @@ export var combinationSum = function (candidates, target) {
   dfs(target, 0);
   return res;
 };
+
+/** This is just fibbonaci :D
+ * @param {number} n
+ * @return {number}
+ */
+export var climbStairs = function (n) {
+  let res = 0;
+  let memo = {};
+
+  function dfs(curStep) {
+    if (n in memo) return 1;
+    if (curStep < 0) return 0;
+    if (curStep == 0) {
+      memo[curStep] = 1;
+      return 1;
+    }
+
+    memo[curStep] = dfs(curStep - 1) + dfs(curStep - 2);
+    return memo[curStep];
+  }
+
+  return dfs(n);
+};
+
+/** This is just fibbonaci :D
+ * @param {number} n
+ * @return {number}
+ */
+export var climbStairsFib = function (n) {
+  if (n <= 1) return 1;
+  let res = 0;
+  let [n_1, n_2] = [1, 1];
+
+  for (let i = 1; i < n; i++) {
+    res = n_1 + n_2;
+    n_2 = n_1;
+    n_1 = res;
+  }
+
+  return res;
+};
