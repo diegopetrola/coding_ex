@@ -906,3 +906,31 @@ export var partition = function (s) {
   dfs(0);
   return res;
 };
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+export var splitString = function (s) {
+  let res = false;
+
+  function bfs(sIndex, split) {
+    if (res) return;
+    for (let i = 0; i < split.length - 1; i++) {
+      if (split[i] - 1 != split[i + 1]) return;
+    }
+    if (sIndex >= s.length && split.length >= 2) {
+      res = true;
+      return;
+    }
+
+    for (let i = sIndex; i < s.length; i++) {
+      split.push(Number(s.substring(sIndex, i + 1)));
+      bfs(i + 1, split);
+      split.pop();
+    }
+  }
+
+  bfs(0, []);
+  return res;
+};

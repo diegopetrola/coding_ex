@@ -1,4 +1,5 @@
 import {
+  splitString,
   partition,
   exist,
   subsetsWithDup,
@@ -535,6 +536,21 @@ describe("partition131", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.expected}`, function () {
       expect(partition(t.p1).length).to.equals(t.expected);
+    });
+  }
+});
+
+describe("splitString", function () {
+  const testCases = [
+    { p1: "050043", expected: true },
+    { p1: "9080701", expected: false },
+    { p1: "0010", expected: true },
+    { p1: "00", expected: false },
+    { p1: "01000000", expected: true },
+  ];
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.expected}`, function () {
+      expect(splitString(t.p1)).to.equals(t.expected);
     });
   }
 });
