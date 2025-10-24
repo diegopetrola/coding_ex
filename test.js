@@ -1,4 +1,13 @@
 import {
+  coinChange,
+  partitionDisjoint,
+  pruneTree,
+  sortedArrayToBST,
+  threeSumClosest,
+  updateMatrix,
+  trap,
+  pushDominoes,
+  mincostTickets,
   climbStairsFib,
   combinationSum,
   splitString,
@@ -22,13 +31,6 @@ import {
   subsets,
 } from "./utils.mjs";
 import { expect } from "chai";
-import { pushDominoes } from "./utils.mjs";
-import { partitionDisjoint } from "./utils.mjs";
-import { pruneTree } from "./utils.mjs";
-import { sortedArrayToBST } from "./utils.mjs";
-import { threeSumClosest } from "./utils.mjs";
-import { updateMatrix } from "./utils.mjs";
-import { trap } from "./utils.mjs";
 
 describe("PowerOfThree", function () {
   context("1st test", function () {
@@ -589,6 +591,21 @@ describe("climbStairs", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1}  expecting ${t.expected}`, function () {
       expect(climbStairsFib(t.p1)).to.equals(t.expected);
+    });
+  }
+});
+
+describe("coinChange", function () {
+  const testCases = [
+    { coins: [1, 2, 5], amount: 11, Output: 3 },
+    { coins: [2], amount: 3, Output: -1 },
+    { coins: [1], amount: 0, Output: 0 },
+    { coins: [5, 6], amount: 11, Output: 2 },
+  ];
+
+  for (const t of testCases) {
+    it(`Testing ${t.coins} expecting ${t.Output}`, function () {
+      expect(coinChange(t.coins, t.amount)).to.equals(t.Output);
     });
   }
 });

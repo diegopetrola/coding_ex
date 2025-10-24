@@ -984,7 +984,7 @@ export var climbStairs = function (n) {
   return dfs(n);
 };
 
-/** This is just fibbonaci :D
+/**
  * @param {number} n
  * @return {number}
  */
@@ -1000,4 +1000,69 @@ export var climbStairsFib = function (n) {
   }
 
   return res;
+};
+
+/**
+ * @param {number[]} days
+ * @param {number[]} costs
+ * @return {number}
+ */
+export var mincostTickets = function (days, costs) {
+  let min = Number.POSITIVE_INFINITY;
+  const costDay = [1, 7, 30];
+  const memo = {};
+
+  function dfs(index, curPayedDay, cost) {
+    if (memo[[index, cost]]) {
+      console.log(`memo[[${index}, ${cost}]]=`, memo[[index, cost]]);
+      return memo[[index, cost]];
+    }
+    if (cost >= min) return Number.POSITIVE_INFINITY;
+    if (index >= days.length) {
+      min = Math.min(min, cost);
+      return min;
+    }
+
+    while (index < days.length && curPayedDay >= days[index]) index++;
+    if (index >= days.length) {
+      memo[[index, cost]] = dfs(index + 1, curPayedDay, cost);
+      return memo[[index, cost]];
+    }
+
+    for (let i = 0; i < costs.length; i++) {
+      memo[[index, cost + costs[i]]] = dfs(
+        index + 1,
+        days[index] + costDay[i] - 1,
+        cost + costs[i]
+      );
+    }
+  }
+
+  dfs(0, 0, 0);
+  return min;
+};
+
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+export var coinChange = function (coins, amount) {
+  const memo = {};
+
+  function dfs(curAmount) {
+    if (curAmount in memo) return memo[curAmount];
+    if (curAmount > amount) return Number.POSITIVE_INFINITY;
+    if (curAmount == amount) return 0;
+
+    const amounts = [];
+    for (let i = 0; i < coins.length; i++) {
+      amounts.push(dfs(curAmount + coins[i]));
+    }
+    memo[curAmount] = 1 + amounts.reduce((p, c) => Math.min(p, c));
+    return memo[curAmount];
+  }
+
+  const res = dfs(0);
+  return res != Number.POSITIVE_INFINITY ? res : -1;
 };
