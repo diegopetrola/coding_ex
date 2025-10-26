@@ -1098,3 +1098,25 @@ export var zigzag = (sequence) => {
   }
   return maxSequence;
 };
+
+/** This is from Top Coder, not from leet code. I copied all the test cases from there
+ * @param {number[]} donations
+ */
+export var badNeighbors = (donations) => {
+  if (donations.length == 1) return donations[0];
+  if (donations.length == 2) return Math.max(donations[0], donations[1]);
+
+  let noFirst = donations.slice(1);
+  let noLast = donations.slice(0, donations.length - 1);
+
+  noFirst[1] = Math.max(noFirst[1], noFirst[0]);
+  noLast[1] = Math.max(noLast[1], noLast[0]);
+  for (let i = 0; i < noLast.length; i++) {
+    if (i - 2 >= 0) {
+      noLast[i] = Math.max(noLast[i - 1], noLast[i - 2] + noLast[i]);
+      noFirst[i] = Math.max(noFirst[i - 1], noFirst[i - 2] + noFirst[i]);
+    }
+  }
+
+  return Math.max(noFirst[noFirst.length - 1], noLast[noLast.length - 1]);
+};
