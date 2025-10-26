@@ -1057,12 +1057,44 @@ export var coinChange = function (coins, amount) {
 
     const amounts = [];
     for (let i = 0; i < coins.length; i++) {
-      amounts.push(dfs(curAmount + coins[i]));
+      if (curAmount + coins[i] <= amount) amounts.push(dfs(curAmount + coins[i]));
     }
+    if (amounts.length == 0) amounts.push(Number.POSITIVE_INFINITY);
     memo[curAmount] = 1 + amounts.reduce((p, c) => Math.min(p, c));
     return memo[curAmount];
   }
 
   const res = dfs(0);
   return res != Number.POSITIVE_INFINITY ? res : -1;
+};
+
+/** This is from Top Coder, not from leet code. I copied all the test cases from there
+ * @param {number[]} sequence
+ */
+export var zigzag = (sequence) => {
+  if (sequence.length == 1) return 1;
+  let results = new Array(sequence.length - 1);
+
+  for (let i = 0; i < results.length; i++) {
+    if (sequence[i + 1] > sequence[i]) {
+      results[i] = 1;
+    } else if (sequence[i + 1] < sequence[i]) {
+      results[i] = -1;
+    } else {
+      results[i] = 100;
+    }
+  }
+
+  let maxSequence = 1;
+  let last = 100;
+  for (let i = 0; i < results.length; i++) {
+    if (last == 100 && results[i] != 100) {
+      last = results[i];
+      maxSequence++;
+    } else if (last + results[i] == 0) {
+      last = results[i];
+      maxSequence++;
+    }
+  }
+  return maxSequence;
 };
