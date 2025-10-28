@@ -1153,3 +1153,30 @@ export var mergeSort = (nums) => {
   }
   return pile[0];
 };
+
+/**
+ * @param {Number[]} nums
+ */
+export var quickSort = (nums) => {
+  const dfs = (start, end) => {
+    if (start >= end) return;
+    // Randomly selects a pivot
+    let randPivot = start + Math.floor(Math.random() * end + 1);
+    [nums[randPivot], nums[start]] = [nums[start], nums[randPivot]];
+
+    let pivot = start;
+    let index = start + 1;
+    for (let i = pivot + 1; i < end + 1; i++) {
+      if (nums[i] <= nums[pivot]) {
+        [nums[index], nums[i]] = [nums[i], nums[index]];
+        index++;
+      }
+    }
+    [nums[pivot], nums[index - 1]] = [nums[index - 1], nums[pivot]];
+    dfs(start, index - 2);
+    dfs(index, end);
+  };
+
+  dfs(0, nums.length - 1);
+  return nums;
+};

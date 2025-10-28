@@ -1,6 +1,7 @@
 import { cases } from "./testCases.js";
 
 import {
+  quickSort,
   mergeSort,
   badNeighbors,
   zigzag,
@@ -647,6 +648,20 @@ describe("mergeSort", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.Result}`, function () {
       expect(mergeSort(t.p1)).to.eqls(t.Result);
+    });
+  }
+});
+describe("quickSort", function () {
+  const testCases = [
+    {
+      p1: [7, 12, 9, 8, 4, 11, 8],
+      Result: [7, 12, 9, 8, 4, 11, 8].sort((a, b) => a - b),
+    },
+  ];
+
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.Result}`, function () {
+      expect(quickSort(t.p1)).to.eqls(t.Result);
     });
   }
 });
