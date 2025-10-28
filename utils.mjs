@@ -1120,3 +1120,36 @@ export var badNeighbors = (donations) => {
 
   return Math.max(noFirst[noFirst.length - 1], noLast[noLast.length - 1]);
 };
+
+/**
+ * @param {number[]} nums
+ */
+export var mergeSort = (nums) => {
+  const merge = (ar1, ar2) => {
+    let [i, j] = [0, 0];
+    let ans = [];
+    while (i < ar1.length && j < ar2.length) {
+      if (ar1[i] < ar2[j]) {
+        ans.push(ar1[i++]);
+      } else {
+        ans.push(ar2[j++]);
+      }
+    }
+    for (; i < ar1.length; i++) ans.push(ar1[i]);
+    for (; j < ar2.length; j++) ans.push(ar2[j]);
+    return ans;
+  };
+
+  let pile = [];
+  for (let v of nums) pile.push([v]);
+
+  while (pile.length > 1) {
+    let ar = [];
+    while (pile.length > 1) {
+      ar.push(merge(pile.pop(), pile.pop()));
+    }
+    ar = ar.concat(pile);
+    pile = ar;
+  }
+  return pile[0];
+};

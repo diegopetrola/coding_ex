@@ -1,6 +1,7 @@
 import { cases } from "./testCases.js";
 
 import {
+  mergeSort,
   badNeighbors,
   zigzag,
   coinChange,
@@ -630,6 +631,22 @@ describe("badNeighbors", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.Returns}`, function () {
       expect(badNeighbors(t.p1)).to.equals(t.Returns);
+    });
+  }
+});
+
+describe("mergeSort", function () {
+  const testCases = [
+    // { p1: [1, 3, 3, 3, 3, 5], Result: [1, 3, 3, 3, 3, 5].sort((a, b) => b - a) },
+    {
+      p1: [4, 9, 3, 7, -1, 0],
+      Result: [4, 9, 3, 7, -1, 0].sort((a, b) => b - a),
+    },
+  ];
+
+  for (const t of testCases) {
+    it(`Testing ${t.p1} expecting ${t.Result}`, function () {
+      expect(mergeSort(t.p1)).to.eqls(t.Result);
     });
   }
 });
