@@ -1180,3 +1180,28 @@ export var quickSort = (nums) => {
   dfs(0, nums.length - 1);
   return nums;
 };
+
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {number}
+ */
+export var minDistance = function (word1, word2) {
+  const memo = {};
+  const dp = (i1, i2) => {
+    if ([i1, i2] in memo) return memo[[i1, i2]];
+    if (i1 == word1.length) return word2.length - i2;
+    if (i2 == word2.length) return word1.length - i1;
+
+    let res = 0;
+    if (word1[i1] == word2[i2]) {
+      res = dp(i1 + 1, i2 + 1);
+    } else {
+      res = 1 + Math.min(dp(i1 + 1, i2 + 1), dp(i1 + 1, i2), dp(i1, i2 + 1));
+    }
+    memo[[i1, i2]] = res;
+    return res;
+  };
+
+  return dp(0, 0);
+};

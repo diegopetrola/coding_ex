@@ -13,7 +13,6 @@ import {
   updateMatrix,
   trap,
   pushDominoes,
-  mincostTickets,
   climbStairsFib,
   combinationSum,
   splitString,
@@ -35,6 +34,7 @@ import {
   search,
   searchInsert,
   subsets,
+  minDistance,
 } from "./utils.mjs";
 import { expect } from "chai";
 
@@ -651,6 +651,7 @@ describe("mergeSort", function () {
     });
   }
 });
+
 describe("quickSort", function () {
   const testCases = [
     {
@@ -662,6 +663,19 @@ describe("quickSort", function () {
   for (const t of testCases) {
     it(`Testing ${t.p1} expecting ${t.Result}`, function () {
       expect(quickSort(t.p1)).to.eqls(t.Result);
+    });
+  }
+});
+
+describe("minDistance", function () {
+  const cases = [
+    // { word1: "horse", word2: "ros", Output: 3 },
+    { word1: "intention", word2: "execution", Output: 5 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.word1} and ${t.word2} expecting ${t.Output}`, () => {
+      expect(minDistance(t.word1, t.word2)).to.eqls(t.Output);
     });
   }
 });
