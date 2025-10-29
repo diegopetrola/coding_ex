@@ -35,6 +35,7 @@ import {
   searchInsert,
   subsets,
   minDistance,
+  minDistanceDP,
 } from "./utils.mjs";
 import { expect } from "chai";
 
@@ -675,7 +676,7 @@ describe("minDistance", function () {
 
   for (let t of cases) {
     it(`Testing ${t.word1} and ${t.word2} expecting ${t.Output}`, () => {
-      expect(minDistance(t.word1, t.word2)).to.eqls(t.Output);
+      expect(minDistanceDP(t.word1, t.word2)).to.eqls(t.Output);
     });
   }
 });
