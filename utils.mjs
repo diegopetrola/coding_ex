@@ -1234,3 +1234,33 @@ export var minDistanceDP = function (word1, word2) {
   }
   return dp[m][n];
 };
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+export var numDecodings = function (s) {
+  const isValid = (start, end) => {
+    if (end > s.length) return false;
+    if (s.at(start) === "0") return 0;
+    let subs = Number(s.substring(start, end));
+    return subs <= 26 && subs !== 0;
+  };
+
+  const dp = Array(s.length)
+    .fill(null)
+    .map(() => Array(2).fill(0));
+
+  const getDp = (i) => dp[i - 1][0] + (i > 1 ? dp[i - 2][1] : 0);
+
+  dp[0][0] = isValid(0, 1) ? 1 : 0;
+  dp[0][1] = isValid(0, 2) ? 1 : 0;
+
+  for (let i = 1; i < dp.length; i++) {
+    let val = getDp(i);
+    if (isValid(i, i + 1)) dp[i][0] = val;
+
+    if (isValid(i, i + 2)) dp[i][1] = val;
+  }
+  return getDp(dp.length);
+};

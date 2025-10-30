@@ -36,6 +36,7 @@ import {
   subsets,
   minDistance,
   minDistanceDP,
+  numDecodings,
 } from "./utils.mjs";
 import { expect } from "chai";
 
@@ -669,14 +670,29 @@ describe("quickSort", function () {
 });
 
 describe("minDistance", function () {
-  const cases = [
-    // { word1: "horse", word2: "ros", Output: 3 },
-    { word1: "intention", word2: "execution", Output: 5 },
-  ];
+  const cases = [{ word1: "intention", word2: "execution", Output: 5 }];
 
   for (let t of cases) {
     it(`Testing ${t.word1} and ${t.word2} expecting ${t.Output}`, () => {
       expect(minDistanceDP(t.word1, t.word2)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("numDecodings", function () {
+  const cases = [
+    { s: "12", Output: 2 },
+    { s: "206", Output: 1 },
+    { s: "406", Output: 0 },
+    { s: "000", Output: 0 },
+    { s: "226", Output: 3 },
+    { s: "106", Output: 1 },
+    { s: "2101", Output: 1 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.s} expecting ${t.Output}`, () => {
+      expect(numDecodings(t.s, t.word2)).to.eqls(t.Output);
     });
   }
 });
