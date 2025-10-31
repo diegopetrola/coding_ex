@@ -1,6 +1,7 @@
 import { cases } from "./testCases.js";
 
 import {
+  numTrees,
   quickSort,
   mergeSort,
   badNeighbors,
@@ -693,6 +694,24 @@ describe("numDecodings", function () {
   for (let t of cases) {
     it(`Testing ${t.s} expecting ${t.Output}`, () => {
       expect(numDecodings(t.s, t.word2)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("numTrees", function () {
+  const cases = [
+    { n: 3, Output: 5 },
+    {
+      n: 1,
+      Output: 1,
+    },
+    { n: 12, Output: 208012 },
+    { n: 5, Output: 42 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.n} expecting ${t.Output}`, () => {
+      expect(numTrees(t.n)).to.eqls(t.Output);
     });
   }
 });

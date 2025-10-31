@@ -1264,3 +1264,26 @@ export var numDecodings = function (s) {
   }
   return getDp(dp.length);
 };
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+export var numTrees = function (n) {
+  const dp = Array(n + 1);
+  dp[0] = 1;
+  dp[1] = 1;
+
+  for (let i = 2; i <= n; i++) {
+    dp[i] = 0;
+    const iover2 = Math.floor(i / 2);
+    const isEven = i % 2 == 0;
+    let j = 0;
+    for (; j < iover2; j++) {
+      dp[i] += 2 * (dp[i - j - 1] * dp[j]);
+    }
+    dp[i] += isEven ? 0 : dp[i - j - 1] * dp[j];
+  }
+
+  return dp[n];
+};
