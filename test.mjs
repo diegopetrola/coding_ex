@@ -35,30 +35,25 @@ import {
   search,
   searchInsert,
   subsets,
-  minDistance,
   minDistanceDP,
   numDecodings,
+  generateTrees,
 } from "./utils.mjs";
+
 import { expect } from "chai";
+import { describe, it } from "mocha";
 
 describe("PowerOfThree", function () {
-  context("1st test", function () {
+  const testCases = [
+    { n: 9, Output: true },
+    { n: 45, Output: false },
+    { n: 43046721, Output: true },
+  ];
+  for (let t of testCases) {
     it("should return true", function () {
-      expect(isPowerOfThree(9)).to.equals(true);
+      expect(isPowerOfThree(t.n)).to.equals(t.Output);
     });
-  });
-
-  context("2st test", function () {
-    it("should return false", function () {
-      expect(isPowerOfThree(45)).to.equals(false);
-    });
-  });
-
-  context("3st test", function () {
-    it("should return true", function () {
-      expect(isPowerOfThree(43046721)).to.equals(true);
-    });
-  });
+  }
 });
 
 describe("romanToInt", function () {
@@ -712,6 +707,24 @@ describe("numTrees", function () {
   for (let t of cases) {
     it(`Testing ${t.n} expecting ${t.Output}`, () => {
       expect(numTrees(t.n)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("generateTrees", function () {
+  const cases = [
+    { n: 3, Output: 5 },
+    { n: 2, Output: 2 },
+    {
+      n: 1,
+      Output: 1,
+    },
+    { n: 5, Output: 42 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.n} expecting ${t.Output}`, () => {
+      expect(generateTrees(t.n).length).to.eqls(t.Output);
     });
   }
 });

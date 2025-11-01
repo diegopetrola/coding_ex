@@ -165,14 +165,12 @@ export function reverseKGroup(head, k) {
   let cur = head;
   let res = head;
   let kprev = head;
-  // kprev.next = head;
   let i = 0;
   let rev = null;
-  let prev = null;
   let lastTail = head;
   while (cur != null) {
     if (++i == k) res = cur;
-    prev = cur;
+
     cur = cur.next;
     if (i % k == 0) {
       lastTail = rev ? rev.tail : head;
@@ -234,7 +232,7 @@ export class TreeNode {
    * @param {Array} ar
    * @returns {TreeNode}
    */
-  static fromArray(ar, i = 0) {
+  static fromArray(ar) {
     function addFromArray(ar, index) {
       if (index >= ar.length || ar[index] === null) return null;
       return new TreeNode(ar[index]);
@@ -503,7 +501,6 @@ export function letterCombinations(digits) {
   };
   if (digits == "") return [];
 
-  debugger;
   let stack = d[digits[0]];
   for (let i = 1; i < digits.length; i++) {
     let new_stack = [];
@@ -966,7 +963,6 @@ export var combinationSum = function (candidates, target) {
  * @return {number}
  */
 export var climbStairs = function (n) {
-  let res = 0;
   let memo = {};
 
   function dfs(curStep) {

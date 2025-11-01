@@ -14,7 +14,10 @@
   "author": "Diego Petrola",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.39.0",
     "chai": "^6.2.0",
+    "eslint": "^9.39.0",
+    "globals": "^16.5.0",
     "mocha": "^11.7.4"
   }
 }
