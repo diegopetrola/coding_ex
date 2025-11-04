@@ -1283,3 +1283,43 @@ export var numTrees = function (n) {
 
   return dp[n];
 };
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+export var isSubsequence = function (s, t) {
+  let i = 0;
+  let j = 0;
+  while (i < s.length && j < t.length) {
+    if (s.at(i) == t.at(j)) {
+      i++;
+    }
+    j++;
+  }
+  return i == s.length;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+export var numberOfArithmeticSlices = function (nums) {
+  let total = 0;
+  let cSum = 0;
+  let l = 1;
+  let lastSub = nums[1] - nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    if (lastSub == nums[i] - nums[i - 1]) {
+      l++;
+      cSum += l - 2;
+      total += l - 2;
+    } else {
+      l = 2;
+      cSum = 0;
+      lastSub = nums[i] - nums[i - 1];
+    }
+  }
+  return total;
+};
