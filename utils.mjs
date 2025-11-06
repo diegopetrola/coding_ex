@@ -1341,3 +1341,79 @@ export var maxProduct = function (nums) {
 
   return max;
 };
+
+/**
+ * @param {character[][]} matrix
+ * @return {number}
+ */
+export var maximalSquare = function (matrix) {
+  const m = matrix.length;
+  const n = matrix[0].length;
+  let maxSide = 0;
+
+  let dp = Array(m)
+    .fill(null)
+    .map(() => Array(n));
+  for (let i = 0; i < m; i++) {
+    if (matrix[i][0] == "1") {
+      dp[i][0] = 1;
+      maxSide = 1;
+    } else dp[i][0] = 0;
+  }
+  for (let j = 0; j < n; j++) {
+    if (matrix[0][j] == "1") {
+      dp[0][j] = 1;
+      maxSide = 1;
+    } else dp[0][j] = 0;
+  }
+
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      if (matrix[i][j] === "1") {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+        maxSide = Math.max(maxSide, dp[i][j]);
+      } else {
+        dp[i][j] = 0;
+      }
+    }
+  }
+  return maxSide * maxSide;
+};
+
+/**
+ * @param {string} s1
+ * @param {string} s2
+ * @param {string} s3
+ * @return {boolean}
+ */
+/**
+ * @param {string} s1
+ * @param {string} s2
+ * @param {string} s3
+ * @return {boolean}
+ */
+export var isInterleave = function (s1, s2, s3) {
+  if (s1.length + s2.length !== s3.length) return false;
+  let [l1, l2] = [s1.length, s2.length];
+  let memo = Array(l1 + 1)
+    .fill(null)
+    .map(() => Array(l2 + 1).fill(null));
+
+  function dfs(i1, i2) {
+    if (i1 === l1 && i2 === l2) return true;
+    if (memo[i1][i2] !== null) return memo[i1][i2];
+    let ans = false;
+    const i3 = i1 + i2;
+
+    if (i1 < l1 && s1[i1] === s3[i3]) {
+      ans = dfs(i1 + 1, i2);
+    }
+    if (!ans && i2 < l2 && s2[i2] === s3[i3]) {
+      ans = dfs(i1, i2 + 1);
+    }
+    memo[i1][i2] = ans;
+    return ans;
+  }
+
+  return dfs(0, 0, 0);
+};

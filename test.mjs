@@ -39,6 +39,8 @@ import {
   numDecodings,
   numberOfArithmeticSlices,
   maxProduct,
+  maximalSquare,
+  isInterleave,
 } from "./utils.mjs";
 
 import { expect } from "chai";
@@ -740,6 +742,48 @@ describe("maxProduct", function () {
   for (let t of cases) {
     it(`Testing ${t.nums} expecting ${t.Output}`, () => {
       expect(maxProduct(t.nums)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("maximalSquare", function () {
+  const cases = [
+    {
+      matrix: [
+        ["1", "0", "1", "0", "0"],
+        ["1", "0", "1", "1", "1"],
+        ["1", "1", "1", "1", "1"],
+        ["1", "0", "0", "1", "0"],
+      ],
+      Output: 4,
+    },
+    { matrix: [["0"]], Output: 0 },
+    {
+      matrix: [
+        ["0", "1"],
+        ["1", "0"],
+      ],
+      Output: 1,
+    },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.matrix} expecting ${t.Output}`, () => {
+      expect(maximalSquare(t.matrix)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("isInterleave", function () {
+  const cases = [
+    { s1: "aabcc", s2: "dbbca", s3: "aadbbcbcac", Output: true },
+    { s1: "aabcc", s2: "dbbca", s3: "aadbbbaccc", Output: false },
+    { s1: "", s2: "", s3: "", Output: true },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.matrix} expecting ${t.Output}`, () => {
+      expect(isInterleave(t.s1, t.s2, t.s3)).to.eqls(t.Output);
     });
   }
 });
