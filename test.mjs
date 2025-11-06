@@ -1,7 +1,6 @@
 import { cases } from "./testCases.js";
 
 import {
-  isSubsequence,
   numTrees,
   quickSort,
   mergeSort,
@@ -39,6 +38,7 @@ import {
   minDistanceDP,
   numDecodings,
   numberOfArithmeticSlices,
+  maxProduct,
 } from "./utils.mjs";
 
 import { expect } from "chai";
@@ -725,6 +725,21 @@ describe("numberOfArithmeticSlices", function () {
   for (let t of cases) {
     it(`Testing ${t.nums} expecting ${t.Output}`, () => {
       expect(numberOfArithmeticSlices(t.nums)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("maxProduct", function () {
+  const cases = [
+    { nums: [2, 3, -2, 4], Output: 6 },
+    // { nums: [-2, 0, -1], Output: 0 },
+    // { nums: [-2, 3, -4], Output: 24 },
+    // { nums: [1, 2, -1, -4, -2, 5, 0], Output: 40 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.nums} expecting ${t.Output}`, () => {
+      expect(maxProduct(t.nums)).to.eqls(t.Output);
     });
   }
 });

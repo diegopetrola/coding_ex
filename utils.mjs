@@ -1307,19 +1307,37 @@ export var isSubsequence = function (s, t) {
  */
 export var numberOfArithmeticSlices = function (nums) {
   let total = 0;
-  let cSum = 0;
   let l = 1;
   let lastSub = nums[1] - nums[0];
   for (let i = 1; i < nums.length; i++) {
     if (lastSub == nums[i] - nums[i - 1]) {
       l++;
-      cSum += l - 2;
       total += l - 2;
     } else {
       l = 2;
-      cSum = 0;
       lastSub = nums[i] - nums[i - 1];
     }
   }
   return total;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+export var maxProduct = function (nums) {
+  let max = nums[0];
+  let minNeg = nums[0];
+  let maxPos = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    const mulPos = nums[i] * maxPos;
+    const mulNeg = nums[i] * minNeg;
+
+    maxPos = Math.max(nums[i], mulPos, mulNeg);
+    minNeg = Math.min(nums[i], mulPos, mulNeg);
+    max = Math.max(max, maxPos);
+  }
+
+  return max;
 };
