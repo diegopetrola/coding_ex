@@ -1417,3 +1417,28 @@ export var isInterleave = function (s1, s2, s3) {
 
   return dfs(0, 0, 0);
 };
+
+/**
+ * @param {number} n
+ * @param {number[]} primes
+ * @return {number}
+ */
+export var nthSuperUglyNumber = function (n, primes) {
+  const size = primes.length;
+  const res = [1];
+  let indices = Array(size).fill(0);
+
+  while (res.length < n) {
+    let minNum = res[indices[0]] * primes[0];
+    for (let i = 1; i < size; i++) {
+      minNum = Math.min(minNum, res[indices[i]] * primes[i]);
+    }
+    for (let i = 0; i < size; i++) {
+      const num = res[indices[i]] * primes[i];
+      if (num === minNum) indices[i]++;
+    }
+    res.push(minNum);
+  }
+
+  return res[res.length - 1];
+};

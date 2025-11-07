@@ -41,6 +41,7 @@ import {
   maxProduct,
   maximalSquare,
   isInterleave,
+  nthSuperUglyNumber,
 } from "./utils.mjs";
 
 import { expect } from "chai";
@@ -784,6 +785,19 @@ describe("isInterleave", function () {
   for (let t of cases) {
     it(`Testing ${t.matrix} expecting ${t.Output}`, () => {
       expect(isInterleave(t.s1, t.s2, t.s3)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("nthSuperUglyNumber", function () {
+  const cases = [
+    { n: 12, primes: [2, 7, 13, 19], Output: 32 },
+    { n: 1, primes: [2, 3, 5], Output: 1 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.n}, ${t.primes} expecting ${t.Output}`, () => {
+      expect(nthSuperUglyNumber(t.n, t.primes)).to.eqls(t.Output);
     });
   }
 });
