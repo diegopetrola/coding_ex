@@ -42,6 +42,7 @@ import {
   maximalSquare,
   isInterleave,
   nthSuperUglyNumber,
+  integerBreak,
 } from "./utils.mjs";
 
 import { expect } from "chai";
@@ -798,6 +799,23 @@ describe("nthSuperUglyNumber", function () {
   for (let t of cases) {
     it(`Testing ${t.n}, ${t.primes} expecting ${t.Output}`, () => {
       expect(nthSuperUglyNumber(t.n, t.primes)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("integerBreak", function () {
+  const cases = [
+    { n: 8, Output: 18 },
+    { n: 3, Output: 2 },
+    { n: 58, Output: 1549681956 },
+    { n: 33, Output: 177147 },
+    { n: 10, Output: 36 },
+    { n: 2, Output: 1 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.n} expecting ${t.Output}`, () => {
+      expect(integerBreak(t.n)).to.eqls(t.Output);
     });
   }
 });

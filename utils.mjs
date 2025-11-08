@@ -1442,3 +1442,30 @@ export var nthSuperUglyNumber = function (n, primes) {
 
   return res[res.length - 1];
 };
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+export var integerBreak = function (n) {
+  function calcProd(m) {
+    const divFloor = Math.floor(n / m);
+    const divCeil = divFloor + 1;
+    const powFloor = Math.pow(divFloor, m - 1);
+    const powCeil = Math.pow(divCeil, m - 1);
+    return Math.max(
+      powCeil * (n - divCeil * (m - 1)),
+      powFloor * (n - divFloor * (m - 1))
+    );
+  }
+
+  let max = 1;
+  let m = 2;
+  const no2 = Math.floor(n / 2) + 1;
+  while (m <= no2) {
+    const num = calcProd(m);
+    max = Math.max(num, max);
+    m++;
+  }
+  return max;
+};
