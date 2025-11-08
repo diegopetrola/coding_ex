@@ -1469,3 +1469,26 @@ export var integerBreak = function (n) {
   }
   return max;
 };
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+export var maxRotateFunction = function (nums) {
+  const n = nums.length;
+
+  let arrSum = 0;
+  let cur = 0;
+  for (let i = 0; i < n; i++) {
+    arrSum += nums[i];
+    cur += i * nums[i];
+  }
+  let max = cur;
+
+  for (let i = 1; i < n; i++) {
+    cur = cur + arrSum - n * nums[n - i];
+    max = Math.max(cur, max);
+  }
+
+  return max;
+};

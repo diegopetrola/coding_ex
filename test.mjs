@@ -43,6 +43,7 @@ import {
   isInterleave,
   nthSuperUglyNumber,
   integerBreak,
+  maxRotateFunction,
 } from "./utils.mjs";
 
 import { expect } from "chai";
@@ -816,6 +817,19 @@ describe("integerBreak", function () {
   for (let t of cases) {
     it(`Testing ${t.n} expecting ${t.Output}`, () => {
       expect(integerBreak(t.n)).to.eqls(t.Output);
+    });
+  }
+});
+
+describe("maxRotateFunc", function () {
+  const cases = [
+    { nums: [4, 3, 2, 6], Output: 26 },
+    { nums: [100], Output: 0 },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.nums} expecting ${t.Output}`, () => {
+      expect(maxRotateFunction(t.nums)).to.eqls(t.Output);
     });
   }
 });
