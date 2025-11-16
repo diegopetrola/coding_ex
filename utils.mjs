@@ -1492,3 +1492,37 @@ export var maxRotateFunction = function (nums) {
 
   return max;
 };
+
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+export var wordBreak = function (s, wordDict) {
+  const slen = s.length;
+  const memo = new Map();
+  const checkEq = (sIndex, str) => {
+    const loopLen = sIndex + str.length;
+    if (loopLen > slen) return false;
+    for (let i = sIndex; i < loopLen; i++) {
+      if (s[i] !== str[i - sIndex]) return false;
+    }
+    return true;
+  };
+  const dfs = (index) => {
+    if (index >= slen) return true;
+    if (index in memo) return memo[index];
+
+    for (let w of wordDict) {
+      if (checkEq(index, w) && dfs(index + w.length)) {
+        memo[index] = true;
+        return true;
+      }
+    }
+
+    memo[index] = false;
+    return false;
+  };
+
+  return dfs(0);
+};

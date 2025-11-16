@@ -44,6 +44,7 @@ import {
   nthSuperUglyNumber,
   integerBreak,
   maxRotateFunction,
+  wordBreak,
 } from "./utils.mjs";
 
 import { expect } from "chai";
@@ -830,6 +831,72 @@ describe("maxRotateFunc", function () {
   for (let t of cases) {
     it(`Testing ${t.nums} expecting ${t.Output}`, () => {
       expect(maxRotateFunction(t.nums)).to.eqls(t.Output);
+    });
+  }
+});
+
+// describe("maximalRectangle", function () {
+//   const cases = [
+//     {
+//       matrix: [
+//         ["1", "0", "1", "0", "0"],
+//         ["1", "0", "1", "1", "1"],
+//         ["1", "1", "1", "1", "1"],
+//         ["1", "0", "0", "1", "0"],
+//       ],
+//       Output: 6,
+//     },
+//     {
+//       matrix: [
+//         ["1", "0"],
+//         ["1", "0"],
+//         ["1", "1"],
+//       ],
+//       Output: 3,
+//     },
+//     { matrix: [["0"]], Output: 0 },
+//     { matrix: [["1"]], Output: 1 },
+//   ];
+
+//   for (let t of cases) {
+//     it(`Testing ${t.matrix} expecting ${t.Output}`, () => {
+//       expect(maximalRectangle(t.matrix)).to.eqls(t.Output);
+//     });
+//   }
+// });
+
+describe("wordBreak", function () {
+  const cases = [
+    { s: "leetcode", wordDict: ["leet", "code"], Output: true },
+    { s: "applepenapple", wordDict: ["apple", "pen"], Output: true },
+    {
+      s: "catsandog",
+      wordDict: ["cats", "dog", "sand", "and", "cat"],
+      Output: false,
+    },
+    {
+      s: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      wordDict: [
+        "a",
+        "aa",
+        "aaa",
+        "aaaa",
+        "aaaaa",
+        "b",
+        "aaaaaa",
+        "aaaaaaa",
+        "aaaaaaaa",
+        "aaaaaaaaa",
+        "aaaaaaaaaa",
+      ],
+      Output: true,
+    },
+    { s: "abcd", wordDict: ["a", "abc", "b", "cd"], Output: true },
+  ];
+
+  for (let t of cases) {
+    it(`Testing ${t.s} expecting ${t.Output}`, () => {
+      expect(wordBreak(t.s, t.wordDict)).to.eqls(t.Output);
     });
   }
 });
