@@ -19,3 +19,46 @@ function digitalRoot(n) {
   }
   return n;
 }
+
+/** @param {n:Number} */
+function descendingOrder(n) {
+  var digits = Array(10).fill(0);
+  while (n > 0) {
+    const r = n % 10;
+    digits[r]++;
+    n = Math.floor(n / 10);
+  }
+
+  let num = 0;
+  for (let i = digits.length - 1; i >= 0; i--) {
+    while (digits[i] > 0) {
+      num = 10 * num + i;
+      digits[i]--;
+    }
+  }
+  return num;
+}
+/**@param {arr:string[]} */
+function sumUpNumbers(arr) {
+  const regex = /^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]{1,2})?$/;
+  let sum = 0;
+  for (let nStr of arr) {
+    if (nStr.match(regex)) {
+      sum += Number(nStr.replaceAll(",", ""));
+    } else {
+      sum += Number(nStr.replaceAll(".", "").replaceAll(",", "."));
+    }
+  }
+  return sum.toLocaleString("en-US", { minimumFractionDigits: 2 });
+}
+
+/**@param {Number} number  */
+function solution(number) {
+  if (number <= 3) return 0;
+  if (number < 5) return 3;
+  const calcSum = (a) => {
+    let n = Math.floor((number - 1) / a);
+    return (n / 2) * (2 * a + (n - 1) * a);
+  };
+  return calcSum(3) + calcSum(5) - calcSum(15);
+}
